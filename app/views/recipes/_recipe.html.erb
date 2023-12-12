@@ -1,0 +1,25 @@
+<div class="card" style="width: 18rem;">
+  <img src="<%= recipe.image.attached? ? url_for(recipe.image) : recipe.imgUrl %>" class="card-img-top" alt="<%= recipe.name %>'s image">
+  <div class="card-body">
+    <h5 class="card-title"> <%= link_to_unless_current recipe.name, recipe %></h5>
+    <h6>Contributed by : <%= link_to recipe.user.name, user_path(recipe.user)%></h6>
+    <% if current_user.favorited_recipes.include?(recipe) %>
+      <% favorite = current_user.favorites.find_by(recipe: recipe) %>
+      <%= button_to 'Unmark Favorite', recipe_favorite_path(recipe, favorite), method: :delete, class: 'bi bi-bookmark-star btn btn-danger' %>
+    <% else %>
+     <%= button_to 'Mark Favorite', recipe_favorites_path(recipe), method: :post, class: 'bi bi-bookmark-star btn btn-warning' %>
+    <% end %>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"><p><strong>Serving:</strong> <%= recipe.servingSize %></p></li>
+    <li class="list-group-item"<p><strong>Budget:</strong> <%= recipe.budget %></p></li>
+    <li class="list-group-item"<p><strong>Prep time:</strong> <%= recipe.prepTime %></p></li>
+    <li class="list-group-item"<p><strong>Cook time:</strong> <%= recipe.cookTime %></p></li>
+    <li class="list-group-item"<p><strong>Ingredients:</strong> <%= recipe.ingredients %></p></li>
+    <li class="list-group-item"<p><strong>Direction:</strong> <%= recipe.cookingDirection %></p></li>
+  </ul>
+</div>
+
+<br>
+
+

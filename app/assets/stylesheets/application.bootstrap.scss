@@ -1,0 +1,8 @@
+@import 'bootstrap/scss/bootstrap';
+@import 'bootstrap-icons/font/bootstrap-icons';
+@import "recipe_comments";
+@import 'actiontext.css';
+/* Show it's not fixed to the top */
+body {
+  min-height: 75rem;
+}

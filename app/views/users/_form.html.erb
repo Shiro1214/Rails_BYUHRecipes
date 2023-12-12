@@ -1,0 +1,17 @@
+<%= bootstrap_form_with(model: @user) do |f| %>
+  <%= f.alert_message "Please fix the erros below.", error_summary: false %> <!-- f: we don't need it to display task.errors -->
+  <%= f.text_field :name %>
+  <%= f.text_field :email %>
+  <%= f.text_field :title %>
+  <%= f.text_field :role %>
+  <%= f.file_field :avatar, label: "Profile Image" %>
+
+  <% if @user.has_password? %>
+    <% if @user.persisted?%>
+      <%= f.password_field :password_challenge, label: "Current Password"%>
+    <% end %>
+    <%= f.password_field :password %>
+    <%= f.password_field :password_confirmation, label: "Confirm Password" %>
+  <% end %>
+  <%= f.primary @user.persisted? ? 'Update' : 'Sign Up' %>
+<% end %>

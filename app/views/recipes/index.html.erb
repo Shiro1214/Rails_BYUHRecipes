@@ -1,0 +1,15 @@
+<% title "Recipes" %>
+<p>
+    <%= link_to "New Recipe", new_recipe_path, class: "btn btn-primary" %>
+    
+</p>
+<div class="recipe-row">
+
+    <% @recipes.each do |recipe| %>
+        <div class="recipe-col m-2 align-self-stretch">
+            <%= render  recipe %> <%#partial: "recipe2", locals: {recipe: recipe}%> 
+        </div>
+    <% end %>
+</div>
+
+

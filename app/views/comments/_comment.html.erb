@@ -1,0 +1,14 @@
+<div id="<%= dom_id(comment)%>" class="comment">
+        <%local_time = comment.updated_at.in_time_zone('Hawaii')
+        formatted_time = local_time.strftime("%m/%d/%y %I:%M%P")
+        %>
+        <% title2 =  " : " + formatted_time %>
+        <% if comment.user%>
+          <% title2 = comment.user.name + title2 %>
+        <% else %>
+          <% title2 = "null" + title2 %>
+        <% end %>
+        <h4> <%= link_to_unless_current title2, recipe_comment_path(@recipe,comment)%></h4>
+        <p><%= comment.content%></p>
+        <p>Rating: <%= comment.rating%>/10</p>
+</div>

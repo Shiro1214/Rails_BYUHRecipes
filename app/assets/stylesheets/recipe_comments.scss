@@ -1,0 +1,30 @@
+.recipe-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:center;
+
+  .recipe-col {
+    flex: 0 0 25%; 
+    /*
+    flex: 0 0 50%;, which means:
+
+flex-grow: 0: The item won't grow beyond its initial size.
+flex-shrink: 0: The item won't shrink if there's less space.
+flex-basis: 50%: The item's initial size is set to 50% of the available space.
+    
+    */
+    flex-shrink: 3;
+    //display: flex;
+    //flex-direction: column;
+      border: 1px solid #000000; //ffcc00
+      padding: 20px;
+/*      margin-left: auto;
+      margin-right: auto;*/
+      border-radius: 20px;
+      //display: inline-block;
+      //width: 50%;
+      font-family: 'Cursive', sans-serif;
+      text-align: left;
+    //justify-content: space-evenly;
+  }
+}

@@ -1,0 +1,91 @@
+<div id="user" class = "recipe-row"> 
+  <div class = "recipe-col"> 
+      <%= render @user%>
+       <div class="dropdown">
+         
+          <% if current_user == @user %>
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Options
+            </button> |
+          <% end %>
+          
+
+          <%= link_to "All Recipes", recipes_path %>
+        
+          <ul class="dropdown-menu">
+             <li><%= link_to "Edit Info", edit_user_path, class: "dropdown-item" %> </li>
+            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Delete</a></li>
+          </ul>
+       </div>
+  </div>
+</div>
+<div id = "user_recipes" class = "recipe-row m-2">
+   <div class = "recipe-col mx-2 align-self-start">
+         <p class="d-inline-flex gap-1">
+      <a data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        Contributions
+      </a>
+    </p>
+    <div class="collapse" id="collapseExample">
+        <table class="table table-dark table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Recipe name</th>
+            </tr>
+          </thead>
+           <tbody>
+            <% @user.recipes.each do |r| %>
+              <tr>
+                <th scope="row"><%= r.id%></th>
+                <td><%=r.name%></td>
+              </tr>
+            <% end %>
+           </tbody>
+      </table>
+
+
+    </div>
+  </div>
+  
+  <div id = "user_comments" class = "recipe-col mx-2 align-self-start">
+    <p class="d-inline-flex gap-1">
+      <a data-bs-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample1">
+        Ratings
+      </a>
+    </p>
+    <div class="collapse" id="collapseExample1">
+
+        <% @user.comments.each do |r| %>
+          <div class="card card-body">
+            <p><%= link_to r.recipe.name, r.recipe%></p>
+            <p>Message: <%= r.content%></p>
+            <p>Rating: <%= r.rating%></p>
+          </div>
+        <% end %>
+
+    </div>
+
+  </div>
+</div>
+ 
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Warning</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure to delete this user?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <%= button_to 'Yes', @user, method: :delete, class: 'btn btn-danger' %>
+      </div>
+    </div>
+  </div>
+</div>

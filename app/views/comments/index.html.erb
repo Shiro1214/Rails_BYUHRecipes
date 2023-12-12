@@ -1,0 +1,8 @@
+<% title "Comments for "+@recipe.name %>
+
+<%= render @recipe.comments%>
+
+<p>
+    <%= link_to "Comment", new_recipe_comment_path(@recipe), class: "btn btn-primary" %>
+    <%= link_to "Back to recipe", @recipe%>
+</p>

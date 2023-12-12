@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.118.2">
+    <title>Recipeauth <%= " | "+ yield(:title) unless yield(:title).blank? %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+  </head>
+
+  <body>
+    <header class="bg-primary text-white text-center py-5">
+      <h1>Discover Delicious Recipes at BYUH Recipes</h1>
+      <p>Your go-to destination for culinary inspiration</p>
+    </header>
+    <!-- Begin nav bar --> 
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4 sticky-top">
+      <div class="container-fluid">
+        <%= link_to 'BYUH Recipes', root_path, class: 'navbar-brand' %>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <%= nav_link 'Home', root_path %>
+            <% if current_user %>
+              <%= nav_link 'Recipes', recipes_path %>
+              <%= nav_link 'Favorites', favorites_path %>
+            <% end %>
+            <%= nav_link 'About', about_path %>
+          </ul>
+          <ul class="navbar-nav mb-2 mb-md-0">
+            <% if  current_user %>
+              <%= nav_link current_user.name, current_user %>
+              <%= nav_link 'Logout', logout_path %>
+            <% else %>
+              <%= nav_link 'Login', login_path %>
+              <%= nav_link 'Sign Up', signup_path %>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- End nav bar --> 
+    <main class = "container-fluid">
+      <!-- Begin Flash Messages Code --> 
+      <div id = "flash-messages" class="w-75" >
+        <% flash.each do |name, msg| %>
+          <div class = "alert alert-<%= name == 'notice' ? 'primary' : 'danger'%> alert-dismissible fade show d-flex justify-content-between" role="alert">
+            <p><strong><%= msg %></strong></p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        <% end %>
+      </div>
+      <!-- End Flash Messages Code --> 
+      <div>
+        <% if @show_title %>
+          <div id="title" class="row">
+            <div class="col">
+              <h1><%= yield(:title) %></h1>
+            </div>
+          </div>
+        <% end %>
+        <%= yield %>
+      </div>
+    </main>
+    
+  </body>
+</html>

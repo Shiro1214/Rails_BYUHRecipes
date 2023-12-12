@@ -1,0 +1,7 @@
+<div class="recipe-row">
+    <% current_user.favorited_recipes.each do |recipe| %>
+        <div class="recipe-col m-2 align-self-stretch">
+            <%= render  recipe %> <%#partial: "recipe2", locals: {recipe: recipe}%> 
+        </div>
+    <% end %>
+</div>

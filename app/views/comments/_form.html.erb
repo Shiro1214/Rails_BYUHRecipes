@@ -1,0 +1,6 @@
+<%= bootstrap_form_with(model: [@recipe,@comment]) do |f| %>
+  <%= f.alert_message "Please fix the erros below.", error_summary: false %> <!-- f: we don't need it to display task.errors -->
+  <%= f.rich_text_area :content %>
+  <%= f.number_field :rating %>
+  <%= f.primary @comment.persisted? ? 'Update Comment' : "Make Comment" %>
+<% end %>
